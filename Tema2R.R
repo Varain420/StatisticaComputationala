@@ -1,6 +1,4 @@
-# ================================================================================
-# SCRIPT COMPLET - RULEAZA TOT ODATA!
-# ================================================================================
+
 
 # Setare director
 if ("rstudioapi" %in% rownames(installed.packages())) {
@@ -208,3 +206,4 @@ cat("Salvat: exercitiul4c_histograme_binomiala.png\n\n")
 cat("\n=== GATA! ===\n")
 cat("Toate fisierele au fost salvate in:", getwd(), "\n")
 cat("Total: 13 fisiere PNG\n")
+
