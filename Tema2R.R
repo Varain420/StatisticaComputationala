@@ -1,15 +1,15 @@
-# Setam directorul de lucru la locatia scriptului 
+
 if (require(rstudioapi)) {
   setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 }
 
-# Afisam directorul de lucru
+
 cat("Directorul de lucru:", getwd(), "\n\n")
 
 
-# ================================================================================
+
 # EXERCITIUL 1
-# ================================================================================
+
 
 # Functie pentru afisarea graficului functiei cos(x) pe intervalul [a, b]
 plot_cosinus <- function(a, b) {
@@ -28,26 +28,26 @@ plot_cosinus <- function(a, b) {
        ylab = "f(x)",
        las = 1)
   
-  # Adaugam grid pentru citire mai usoara
+  
   grid()
 }
 
 # Afisam graficul in Plots
 plot_cosinus(-2*pi, 2*pi)
 
-# Salvam graficul ca PNG
+
 png("exercitiul1_cosinus.png", width = 800, height = 600, res = 100)
 plot_cosinus(-2*pi, 2*pi)
 dev.off()
 cat("Salvat: exercitiul1_cosinus.png\n\n")
 
-# Pauza pentru a vedea graficul
+
 readline(prompt = "Apasa Enter pentru a continua la Exercitiul 2...")
 
 
-# ================================================================================
+
 # EXERCITIUL 2
-# ================================================================================
+
 
 # Refacem graficele pentru distributia binomiala B(n=20, x, p)
 # pentru p = 0.1, 0.2, ..., 0.9
@@ -74,7 +74,7 @@ for (p in p_values) {
   points(x, probabilitati, pch = 19, col = "blue", cex = 1.2)
   grid()
   
-  # Salvam in PNG
+  
   png(paste0("exercitiul2_binomial_n20_p", p, ".png"), 
       width = 800, height = 600, res = 100)
   
@@ -95,7 +95,7 @@ for (p in p_values) {
   
   cat("Salvat: exercitiul2_binomial_n20_p", p, ".png\n", sep = "")
   
-  # Pauza scurta pentru a vedea fiecare grafic
+  
   Sys.sleep(0.5)
 }
 
@@ -103,9 +103,9 @@ cat("\n")
 readline(prompt = "Apasa Enter pentru a continua la Exercitiul 3...")
 
 
-# ================================================================================
+
 # EXERCITIUL 3
-# ================================================================================
+
 
 # Desenam graficele densitatii distributiei normale N(0, sigma^2)
 # pentru sigma = 0.5, 1, 2 pe intervalul [-5, 5]
@@ -121,7 +121,7 @@ mu <- 0
 # Initializam graficul cu prima distributie
 y1 <- dnorm(x, mean = mu, sd = sigma_values[1])
 
-# Afisam in Plots
+
 plot(x, y1,
      type = "l",
      col = culori[1],
@@ -138,17 +138,17 @@ for (i in 2:length(sigma_values)) {
   lines(x, y, col = culori[i], lwd = 2)
 }
 
-# Adaugam legenda
+
 legend("topright",
        legend = paste0("sigma = ", sigma_values),
        col = culori,
        lwd = 2,
        bty = "n")
 
-# Adaugam grid
+
 grid()
 
-# Salvam graficul ca PNG
+
 png("exercitiul3_normale.png", width = 800, height = 600, res = 100)
 
 y1 <- dnorm(x, mean = mu, sd = sigma_values[1])
@@ -182,11 +182,11 @@ cat("Salvat: exercitiul3_normale.png\n\n")
 readline(prompt = "Apasa Enter pentru a continua la Exercitiul 4...")
 
 
-# ================================================================================
-# EXERCITIUL 4
-# ================================================================================
 
-# ----- Partea (a) -----
+# EXERCITIUL 4
+
+
+# (a) 
 # Functie CLT pentru distributia uniforma U[0, 20]
 
 CLT <- function(n) {
@@ -209,20 +209,20 @@ CLT <- function(n) {
 }
 
 
-# ----- Partea (b) -----
+# (b)
 # Construim histogramele pentru n = 1, 5, 10, 100
 
-# Definim valorile lui n
+
 n_values <- c(1, 5, 10, 100)
 
-# Afisam in Plots
+
 par(mfrow = c(2, 2))
 
 for (n in n_values) {
   # Generam mediile folosind functia CLT
   medii <- CLT(n)
   
-  # Construim histograma
+  
   hist(medii,
        breaks = 30,
        col = "lightblue",
@@ -242,7 +242,7 @@ for (n in n_values) {
         lwd = 2,
         add = TRUE)
   
-  # Adaugam legenda
+  
   legend("topright",
          legend = c("Observat", "Normal teoretic"),
          fill = c("lightblue", NA),
@@ -256,7 +256,7 @@ for (n in n_values) {
 
 par(mfrow = c(1, 1))
 
-# Salvam graficul ca PNG
+
 png("exercitiul4b_histograme_uniforma.png", width = 1000, height = 1000, res = 100)
 
 par(mfrow = c(2, 2))
@@ -305,10 +305,10 @@ readline(prompt = "Apasa Enter pentru a continua la Exercitiul 4(c)...")
 # Rescriem functia CLT pentru distributia binomiala B(x, 20, 0.9)
 
 CLT_binomial <- function(n) {
-  # Numarul de esantioane
+  
   num_esantioane <- 1000
   
-  # Vector pentru stocarea mediilor
+  
   medii <- numeric(num_esantioane)
   
   # Generam 1000 de esantioane si calculam media fiecaruia
@@ -319,18 +319,18 @@ CLT_binomial <- function(n) {
     medii[i] <- mean(esantion)
   }
   
-  # Returnam vectorul mediilor
+  
   return(medii)
 }
 
-# Afisam in Plots
+
 par(mfrow = c(2, 2))
 
 for (n in n_values) {
   # Generam mediile folosind functia CLT_binomial
   medii <- CLT_binomial(n)
   
-  # Construim histograma
+  
   hist(medii,
        breaks = 30,
        col = "lightgreen",
@@ -405,6 +405,7 @@ par(mfrow = c(1, 1))
 
 dev.off()
 cat("Salvat: exercitiul4c_histograme_binomiala.png\n\n")
+
 
 
 
